@@ -1,3 +1,6 @@
+using DataAccessLayer.Repositories.Impl;
+using DataAccessLayer.Repositories.Interfaces;
+using InvoiceOrchestrator.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -21,6 +24,14 @@ namespace InvoiceOrchestrator
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.Configure<MongoConfigurations>(options =>
+            {
+                options.ConnectionString 
+                    = Configuration.GetSection("MongoConnection:ConnectionString").Value;
+                options.Database 
+                    = Configuration.GetSection("MongoConnection:Database").Value;
+            });
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
