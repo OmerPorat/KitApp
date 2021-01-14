@@ -4,17 +4,17 @@ using MongoDB.Driver;
 
 namespace InvoiceOrchestrator.Configurations
 {
-    public class InvoiceContext
+    public class KitContext
     {
         private readonly IMongoDatabase _database = null;
-
-        public InvoiceContext(IOptions<MongoConfigurations> settings)
+        public IMongoCollection<Kit> Kits => _database.GetCollection<Kit>("Kits");
+        
+        public KitContext(IOptions<MongoConfigurations> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             if (client != null)
                 _database = client.GetDatabase(settings.Value.Database);
         }
 
-        public IMongoCollection<Invoice> Invoices => _database.GetCollection<Invoice>("Invoice");
     }
 }

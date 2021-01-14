@@ -1,19 +1,22 @@
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
+using MongoDB.Bson;
 
 namespace DataAccessLayer.Repositories.Interfaces
 {
     public interface IInvoiceRepository
     {
 
-        Task<Invoice> GetInvoice(string id);
+        Task<Kit> GetKitByName(string name);
         
         // add new note document
-        Task AddInvoice(Invoice item);
+        Task AddKit(Kit kit);
 
         // remove a single document / note
-        Task<bool> RemoveInvoice(string id);
-        
-        
+        Task<bool> RemoveKit(string name);
+
+        Task<bool> UpdateKit(Kit kit);
+
+
     }
 }
