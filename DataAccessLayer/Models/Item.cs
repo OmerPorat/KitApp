@@ -9,7 +9,6 @@ namespace DataAccessLayer.Models
         {
                 
         }
-
         public string ItemName { get; set; }
         public bool needFix { get; set; }
         public string borrowedTo { get; set; }
