@@ -13,24 +13,26 @@ namespace InvoiceOrchestrator.Controllers
     [Route("KitController")]
     public class KitController : ControllerBase
     {
-        private readonly IInvoiceRepository _kitRepo;
+        private readonly IKitRepository _kitRepo;
         private readonly ILogger<KitController> _logger;
 
-        public KitController(ILogger<KitController> logger, IInvoiceRepository kitRepo)
+        public KitController(ILogger<KitController> logger, IKitRepository kitRepo)
         {
             _logger = logger;
             _kitRepo = kitRepo;
         }
 
+        
+
         [HttpGet]
-        [Route("{name}")]
-        public async Task<ActionResult> Get(string name)
+        [Route("{id}")]
+        public async Task<ActionResult> Get(Guid id)
         {
-            if (name == null)
+            if (id == Guid.Empty )
             {
                 return BadRequest();
             }
-            var res = await _kitRepo.GetKitByName(name);
+            var res = await _kitRepo.GetKitById(id);
             return Ok(res);
         }
 

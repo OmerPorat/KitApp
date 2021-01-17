@@ -1,13 +1,14 @@
+using System;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
 using MongoDB.Bson;
 
 namespace DataAccessLayer.Repositories.Interfaces
 {
-    public interface IInvoiceRepository
+    public interface IKitRepository
     {
 
-        Task<Kit> GetKitByName(string name);
+        Task<Kit> GetKitById(Guid id);
         
         // add new note document
         Task AddKit(Kit kit);

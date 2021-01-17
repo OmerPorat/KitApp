@@ -9,23 +9,23 @@ using MongoDB.Libmongocrypt;
 
 namespace DataAccessLayer.Repositories.Impl
 {
-    public class InvoiceRepository: IInvoiceRepository
+    public class KitRepository: IKitRepository
     {
         
         private readonly KitContext _context = null;
 
 
-        public InvoiceRepository(IOptions<MongoConfigurations> settings)
+        public KitRepository(IOptions<MongoConfigurations> settings)
         {
             _context = new KitContext(settings);
         }
-
-        public async Task<Kit> GetKitByName(string name)
+        
+        public async Task<Kit> GetKitById(Guid id)
         {
             try
             {
                 return await _context.Kits
-                    .Find(kit => kit.KitName == name)
+                    .Find(kit => kit.KitId == id)
                     .FirstOrDefaultAsync();
             }
             catch (Exception ex)

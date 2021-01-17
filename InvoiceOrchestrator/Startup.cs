@@ -31,7 +31,7 @@ namespace InvoiceOrchestrator
                 options.Database 
                     = Configuration.GetSection("MongoConnection:Database").Value;
             });
-            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<IKitRepository, KitRepository>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
